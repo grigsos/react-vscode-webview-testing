@@ -7,6 +7,7 @@ export interface IAppProps {}
 export const App: React.FunctionComponent<IAppProps> = ({ }: React.PropsWithChildren<IAppProps>) => {
   const [message, setMessage] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
+  const [selectOptions, setSelectOptions] = React.useState<string[]>([]);
 
   const sendMessage = () => {
     messageHandler.send('POST_DATA', { msg: 'Hello from the webview' });
@@ -15,6 +16,8 @@ export const App: React.FunctionComponent<IAppProps> = ({ }: React.PropsWithChil
   const requestData = () => {
     messageHandler.request<string>('GET_DATA').then((msg) => {
       setMessage(msg);
+
+      setSelectOptions(prevOptions => [...prevOptions, msg]);
     });
   };
 
@@ -44,6 +47,14 @@ export const App: React.FunctionComponent<IAppProps> = ({ }: React.PropsWithChil
         <button onClick={requestWithErrorData}>
           Get data with error
         </button>
+
+        <select>
+          <option>Test</option>
+          <option>Test2</option>
+          {selectOptions.map((option, index) => (
+            <option key={index}>{option}</option>
+          ))}
+        </select>
       </div>
 
       {message && <p><strong>Message from the extension</strong>: {message}</p>}
