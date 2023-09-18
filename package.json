@@ -13,11 +13,27 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:vscode-react-webview-starter.openWebview"
-  ],
+  "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+			"activitybar": [
+				{
+					"id": "ConvyorView",
+					"title": "Conveyor",
+					"icon": "media/dep.svg"
+				}
+			]
+		},
+		"views": {
+			"ConvyorView": [
+				{
+					"type": "webview",
+					"id": "conveyorCommands.conveyorWebView",
+					"name": ""
+				}
+			]
+		},
     "commands": [
       {
         "command": "vscode-react-webview-starter.openWebview",
