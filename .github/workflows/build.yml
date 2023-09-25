@@ -15,5 +15,7 @@ jobs:
           node-version: 16
       - name: Install dependencies
         run: npm install 
+      - name: Install vsce
+        run: npm i -g @vscode/vsce
       - name: Test if it can be VSCE packaged
         run: vsce package 
